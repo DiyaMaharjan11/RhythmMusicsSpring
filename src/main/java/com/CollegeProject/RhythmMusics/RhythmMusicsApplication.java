@@ -8,6 +8,8 @@ public class RhythmMusicsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RhythmMusicsApplication.class, args);
+
+		System.out.println("RhythmMusicsApplication started");
 	}
 
 }
