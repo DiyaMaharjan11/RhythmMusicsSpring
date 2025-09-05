@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - RhythmMusics</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<script>
+
+
+// Dashboard JavaScript functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Check authentication
+    checkAuth();
+    
+    // Initialize dashboard
+    initializeDashboard();
+    
+    // Initialize sidebar navigation
+    initializeSidebarNavigation();
+    
+    // Load user data
+    loadUserData();
+});
+
+function checkAuth() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const userData = JSON.parse(localStorage.getItem('rhythmUser') || '{}');
+    
+    if (isLoggedIn !== 'true' || !userData.email) {
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    // Check if admin trying to access regular dashboard
+    if (userData.userType === 'admin' && !window.location.pathname.includes('admin-dashboard.html')) {
+        window.location.href = 'admin-dashboard.html';
+        return;
+    }
+    
+    // Check if regular user trying to access admin dashboard
+    if (userData.userType !== 'admin' && window.location.pathname.includes('admin-dashboard.html')) {
+        window.location.href = 'dashboard.html';
+        return;
+    }
+}
+
+function initializeDashboard() {
+    // Show overview section by default
+    showSection('overview');
+    
+    // Initialize progress bars with animation
+    setTimeout(() => {
+        animateProgressBars();
+    }, 500);
+    
+    // Update greeting based on time
+    updateGreeting();
+    
+    // Load dashboard stats
+    loadDashboardStats();
+}
+
+function initializeSidebarNavigation() {
+    const menuItems = document.querySelectorAll('.menu-item');
+    
+    menuItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all items
+            menuItems.forEach(mi => mi.classList.remove('active'));
+            
+            // Add active class to clicked item
+            this.classList.add('active');
+            
+            // Get section to show
+            const href = this.getAttribute('href');
+            const sectionId = href.substring(1); // Remove #
+            
+            showSection(sectionId);
+        });
+    });
+}
+
+function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Show target section
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active');
+        
+        // Animate section entrance
+        targetSection.style.opacity = '0';
+        targetSection.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            targetSection.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            targetSection.style.opacity = '1';
+            targetSection.style.transform = 'translateY(0)';
+        }, 10);
+    }
+    
+    // Update URL hash without scrolling
+    history.replaceState(null, null, `#${sectionId}`);
+}
+
+function loadUserData() {
+    const userData = JSON.parse(localStorage.getItem('rhythmUser') || '{}');
+    
+    // Update user name displays
+    const userNameElements = document.querySelectorAll('#userName, #dashboardUserName');
+    userNameElements.forEach(element => {
+        if (element) {
+            const name = userData.fullName ? userData.fullName.split(' ')[0] : userData.userType || 'User';
+            element.textContent = name;
+        }
+    });
+    
+    // Update user type specific content
+    updateUserTypeContent(userData.userType);
+}
+
+function updateUserTypeContent(userType) {
+    // Customize content based on user type
+    const roleSpecificContent = {
+        'student': {
+            greeting: 'Continue your musical journey',
+            primaryColor: 'var(--primary-color)'
+        },
+        'teacher': {
+            greeting: 'Manage your students and classes',
+            primaryColor: 'var(--secondary-color)'
+        },
+        'user': {
+            greeting: 'Explore musical opportunities',
+            primaryColor: 'var(--accent-color)'
+        }
+    };
+    
+    const content = roleSpecificContent[userType] || roleSpecificContent['user'];
+    
+    // Update greeting
+    const greetingElement = document.querySelector('.dashboard-header p');
+    if (greetingElement) {
+        greetingElement.textContent = content.greeting;
+    }
+}
+
+function updateGreeting() {
+    const hour = new Date().getHours();
+    let greeting = 'Good morning';
+    
+    if (hour >= 12 && hour < 18) {
+        greeting = 'Good afternoon';
+    } else if (hour >= 18) {
+        greeting = 'Good evening';
+    }
+    
+    const userData = JSON.parse(localStorage.getItem('rhythmUser') || '{}');
+    const name = userData.fullName ? userData.fullName.split(' ')[0] : 'there';
+    
+    const headerElement = document.querySelector('.dashboard-header h1');
+    if (headerElement) {
+        headerElement.innerHTML = `${greeting}, <span id="dashboardUserName">${name}</span>!`;
+    }
+}
+
+function loadDashboardStats() {
+    // Simulate loading stats with animation
+    const statValues = document.querySelectorAll('.stat-info h3');
+    
+    statValues.forEach(stat => {
+        const target = parseInt(stat.textContent);
+        animateCounter(stat, target);
+    });
+}
+
+function animateCounter(element, target) {
+    let count = 0;
+    const increment = target / 30;
+    const timer = setInterval(() => {
+        count += increment;
+        if (count >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(count);
+        }
+    }, 50);
+}
+
+function animateProgressBars() {
+    const progressBars = document.querySelectorAll('.progress-fill');
+    
+    progressBars.forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0%';
+        
+        setTimeout(() => {
+            bar.style.transition = 'width 1s ease-out';
+            bar.style.width = width;
+        }, 100);
+    });
+    
+    // Animate skill bars
+    const skillBars = document.querySelectorAll('.skill-progress');
+    skillBars.forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0%';
+        
+        setTimeout(() => {
+            bar.style.transition = 'width 1.2s ease-out';
+            bar.style.width = width;
+        }, 200);
+    });
+}
+
+function logout() {
+    // Clear user data
+    localStorage.removeItem('rhythmUser');
+    localStorage.removeItem('isLoggedIn');
+    
+    // Show logout notification
+    showNotification('Logged out successfully');
+    
+    // Redirect to home page
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 1000);
+}
+
+// Course interaction functions
+function continueCourse(courseId) {
+    showNotification(`Continuing ${courseId} course...`);
+    // Add course continuation logic here
+}
+
+function startCourse(courseId) {
+    showNotification(`Starting ${courseId} course...`);
+    // Add course start logic here
+}
+
+// Schedule navigation
+function navigateSchedule(direction) {
+    const scheduleHeader = document.querySelector('.schedule-header h3');
+    if (scheduleHeader) {
+        const currentText = scheduleHeader.textContent;
+        if (direction === 'next') {
+            scheduleHeader.textContent = 'Next Week';
+        } else {
+            scheduleHeader.textContent = 'Previous Week';
+        }
+        
+        // Reset to current week after 2 seconds
+        setTimeout(() => {
+            scheduleHeader.textContent = 'This Week';
+        }, 2000);
+    }
+    
+    showNotification(`Navigating to ${direction} week`);
+}
+
+// Utility function for notifications
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        color: white;
+        font-weight: 500;
+        z-index: 9999;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        max-width: 300px;
+    `;
+    
+    if (type === 'success') {
+        notification.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+    } else if (type === 'error') {
+        notification.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+    } else if (type === 'warning') {
+        notification.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+    }
+    
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Auto remove
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+// Handle hash navigation
+window.addEventListener('hashchange', function() {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        showSection(hash);
+        
+        // Update active menu item
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${hash}`) {
+                item.classList.add('active');
+            }
+        });
+    }
+});
+
+// Initialize hash navigation on load
+window.addEventListener('load', function() {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        showSection(hash);
+        
+        // Update active menu item
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${hash}`) {
+                item.classList.add('active');
+            }
+        });
+    }
+});
+</script>
+<body>
+    <nav class="navbar dashboard-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src ="assets/logo.png">
+                
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+                <div class="user-menu">
+                    <span class="user-name" id="userName">User</span>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle">⚙️</button>
+                        <div class="dropdown-menu">
+                            <a href="profile.html">Edit Profile</a>
+                            <a href="#" onclick="logout()">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-menu">
+                <a href="#overview" class="menu-item active" onclick="showSection('overview')">
+                    <span class="menu-icon">📊</span>
+                    Overview
+                </a>
+                <a href="#lessons" class="menu-item" onclick="showSection('lessons')">
+                    <span class="menu-icon">🎵</span>
+                    My Lessons
+                </a>
+                <a href="#instruments" class="menu-item" onclick="showSection('instruments')">
+                    <span class="menu-icon">🎸</span>
+                    Instruments
+                </a>
+                <a href="#progress" class="menu-item" onclick="showSection('progress')">
+                    <span class="menu-icon">📈</span>
+                    Progress
+                </a>
+                <a href="#schedule" class="menu-item" onclick="showSection('schedule')">
+                    <span class="menu-icon">📅</span>
+                    Schedule
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div id="overview" class="content-section active">
+                <div class="dashboard-header">
+                    <h1>Welcome back ! <span id="dashboardUserName">Student</span>!</h1>
+                    <p> “Take your music to the next digital stage”</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>Lessons Completed</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-info">
+                            <h3>24h</h3>
+                            <p>Practice Time</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-info">
+                            <h3>3</h3>
+                            <p>Certificates</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-info">
+                            <h3>5</h3>
+                            <p>Active Courses</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <span class="activity-icon">🎻</span>
+                                <div class="activity-info">
+                                    <p>Completed Sarangi Lesson 3</p>
+                                    <small>2 hours ago</small>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-icon">🪘</span>
+                                <div class="activity-info">
+                                    <p>Practiced Madal rhythms</p>
+                                    <small>1 day ago</small>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-icon">🎸</span>
+                                <div class="activity-info">
+                                    <p>Started Guitar Course</p>
+                                    <small>3 days ago</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Upcoming Lessons</h3>
+                        <div class="lesson-list">
+                            <div class="lesson-item">
+                                <div class="lesson-time">
+                                    <span class="time">2:00 PM</span>
+                                    <span class="date">Today</span>
+                                </div>
+                                <div class="lesson-info">
+                                    <h4>Madal Advanced Techniques</h4>
+                                    <p>With Teacher Ram Sharma</p>
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="lesson-time">
+                                    <span class="time">10:00 AM</span>
+                                    <span class="date">Tomorrow</span>
+                                </div>
+                                <div class="lesson-info">
+                                    <h4>Guitar Chord Progressions</h4>
+                                    <p>With Teacher Sarah Johnson</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="lessons" class="content-section">
+                <h2>My Lessons</h2>
+                <div class="lessons-grid">
+                    <div class="lesson-card">
+                        <div class="lesson-header">
+                            <h3>🪘 Madal Mastery</h3>
+                            <span class="lesson-status active">Active</span>
+                        </div>
+                        <div class="lesson-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                            <span>60% Complete</span>
+                        </div>
+                        <p>Learn traditional Nepali percussion</p>
+                        <button class="btn btn-primary">Continue</button>
+                    </div>
+                    
+                    <div class="lesson-card">
+                        <div class="lesson-header">
+                            <h3>🎻 Sarangi Basics</h3>
+                            <span class="lesson-status active">Active</span>
+                        </div>
+                        <div class="lesson-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                            <span>80% Complete</span>
+                        </div>
+                        <p>Classical Nepali string instrument</p>
+                        <button class="btn btn-primary">Continue</button>
+                    </div>
+                    
+                    <div class="lesson-card">
+                        <div class="lesson-header">
+                            <h3>🎸 Guitar Fundamentals</h3>
+                            <span class="lesson-status new">New</span>
+                        </div>
+                        <div class="lesson-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 20%"></div>
+                            </div>
+                            <span>20% Complete</span>
+                        </div>
+                        <p>Modern guitar techniques and chords</p>
+                        <button class="btn btn-primary">Continue</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="instruments" class="content-section">
+                <h2>Available Instruments</h2>
+                <div class="instruments-grid">
+                    <div class="instrument-card">
+                        <div class="instrument-icon">🪘</div>
+                        <h3>Madal</h3>
+                        <p>Traditional Nepali percussion instrument used in folk music</p>
+                        <button class="btn btn-secondary">Learn More</button>
+                    </div>
+                    <div class="instrument-card">
+                        <div class="instrument-icon">🎻</div>
+                        <h3>Sarangi</h3>
+                        <p>Classical Nepali string instrument with rich cultural heritage</p>
+                        <button class="btn btn-secondary">Learn More</button>
+                    </div>
+                    <div class="instrument-card">
+                        <div class="instrument-icon">🎸</div>
+                        <h3>Guitar</h3>
+                        <p>Versatile modern instrument for various music styles</p>
+                        <button class="btn btn-secondary">Learn More</button>
+                    </div>
+                    <div class="instrument-card">
+                        <div class="instrument-icon">🎹</div>
+                        <h3>Piano</h3>
+                        <p>Foundation instrument for music theory and composition</p>
+                        <button class="btn btn-secondary">Learn More</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="progress" class="content-section">
+                <h2>Learning Progress</h2>
+                <div class="progress-overview">
+                    <div class="progress-card">
+                        <h3>Overall Progress</h3>
+                        <div class="circular-progress">
+                            <div class="progress-circle">
+                                <span class="progress-value">65%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="skill-name">Madal</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                            <span class="skill-level">Advanced</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Sarangi</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 55%"></div>
+                            </div>
+                            <span class="skill-level">Intermediate</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Guitar</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 30%"></div>
+                            </div>
+                            <span class="skill-level">Beginner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="schedule" class="content-section">
+                <h2>Class Schedule</h2>
+                <div class="schedule-container">
+                    <div class="schedule-header">
+                        <button class="btn btn-secondary">&lt; Previous</button>
+                        <h3>This Week</h3>
+                        <button class="btn btn-secondary">Next &gt;</button>
+                    </div>
+                    <div class="schedule-grid">
+                        <div class="day-column">
+                            <h4>Monday</h4>
+                            <div class="time-slot">
+                                <div class="class-item">
+                                    <span class="time">10:00 AM</span>
+                                    <span class="subject">Madal</span>
+                                    <span class="teacher">Ram Sharma</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="day-column">
+                            <h4>Tuesday</h4>
+                            <div class="time-slot">
+                                <div class="class-item">
+                                    <span class="time">2:00 PM</span>
+                                    <span class="subject">Guitar</span>
+                                    <span class="teacher">Sarah Johnson</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="day-column">
+                            <h4>Wednesday</h4>
+                            <div class="time-slot">
+                                <div class="class-item">
+                                    <span class="time">11:00 AM</span>
+                                    <span class="subject">Sarangi</span>
+                                    <span class="teacher">Krishna Lama</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="day-column">
+                            <h4>Thursday</h4>
+                            <div class="time-slot empty">
+                                <span>No classes</span>
+                            </div>
+                        </div>
+                        <div class="day-column">
+                            <h4>Friday</h4>
+                            <div class="time-slot">
+                                <div class="class-item">
+                                    <span class="time">3:00 PM</span>
+                                    <span class="subject">Piano</span>
+                                    <span class="teacher">Maria Garcia</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RhythmMusics</h3>
+                    <p>Your premier destination for musical instruments and education.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="products.html">Instruments</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="login.html">Student Login</a></li>
+                        <li><a href="teacher-login.html">Teacher Portal</a></li>
+                        <li><a href="admin-login.html">Admin Panel</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 RhythmMusics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

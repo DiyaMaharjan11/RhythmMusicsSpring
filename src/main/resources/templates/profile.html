@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Rhythm Music</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+    <nav class="navbar dashboard-nav">
+        <div class="nav-container">
+            <div class="nav-logo"> 
+                <img src ="assets/logo.png">
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="profile.html" class="nav-link active">Profile</a>
+                <div class="user-menu">
+                    <span class="user-name" id="userName">User</span>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle">⚙️</button>
+                        <div class="dropdown-menu">
+                            <a href="profile.html">Edit Profile</a>
+                            <a href="#" onclick="logout()">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <div class="profile-sidebar">
+            <div class="profile-avatar">
+                <div class="avatar-circle">
+                    <span id="avatarInitials">U</span>
+                </div>
+                <button class="btn btn-secondary btn-small">Change Photo</button>
+            </div>
+            <div class="profile-nav">
+                <a href="#general" class="profile-nav-item active" onclick="showProfileSection('general')">
+                    <span>👤</span> General Info
+                </a>
+                <a href="#account" class="profile-nav-item" onclick="showProfileSection('account')">
+                    <span>🔒</span> Account Settings
+                </a>
+                <a href="#preferences" class="profile-nav-item" onclick="showProfileSection('preferences')">
+                    <span>⚙️</span> Preferences
+                </a>
+                <a href="#achievements" class="profile-nav-item" onclick="showProfileSection('achievements')">
+                    <span>🏆</span> Achievements
+                </a>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <div id="general" class="profile-section active">
+                <div class="section-header">
+                    <h2>General Information</h2>
+                    <button class="btn btn-primary" onclick="toggleEdit('general')">Edit</button>
+                </div>
+                
+                <form class="profile-form" id="generalForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" value="John" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" value="Doe" disabled>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" value="john.doe@email.com" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" value="+977-9812345678" disabled>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="userType">Account Type</label>
+                            <select id="userType" name="userType" disabled>
+                                <option value="student" selected>Student</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateJoined">Date Joined</label>
+                            <input type="text" id="dateJoined" name="dateJoined" value="January 15, 2025" disabled>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bio">Biography</label>
+                        <textarea id="bio" name="bio" rows="4" disabled>Passionate music student learning traditional Nepali instruments and modern music theory. Currently focusing on Madal and Sarangi while exploring guitar as a hobby.</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interests">Musical Interests</label>
+                        <input type="text" id="interests" name="interests" value="Traditional Nepali Music, Folk Songs, Classical Guitar" disabled>
+                    </div>
+                    
+                    <div class="form-actions hidden" id="generalActions">
+                        <button type="button" class="btn btn-secondary" onclick="cancelEdit('general')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="account" class="profile-section">
+                <div class="section-header">
+                    <h2>Account Settings</h2>
+                </div>
+                
+                <div class="account-sections">
+                    <div class="account-card">
+                        <h3>🔐 Change Password</h3>
+                        <p>Keep your account secure with a strong password</p>
+                        <form class="password-form">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword" name="currentPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword" name="newPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmNewPassword">Confirm New Password</label>
+                                <input type="password" id="confirmNewPassword" name="confirmNewPassword">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Password</button>
+                        </form>
+                    </div>
+                    
+                    <div class="account-card">
+                        <h3>📧 Email Preferences</h3>
+                        <div class="preference-list">
+                            <div class="preference-item">
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <div class="preference-info">
+                                    <h4>Lesson Reminders</h4>
+                                    <p>Get notified about upcoming lessons</p>
+                                </div>
+                            </div>
+                            <div class="preference-item">
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <div class="preference-info">
+                                    <h4>Progress Updates</h4>
+                                    <p>Weekly progress reports and achievements</p>
+                                </div>
+                            </div>
+                            <div class="preference-item">
+                                <label class="toggle">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                <div class="preference-info">
+                                    <h4>Marketing Emails</h4>
+                                    <p>New courses and special offers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="preferences" class="profile-section">
+                <div class="section-header">
+                    <h2>Learning Preferences</h2>
+                </div>
+                
+                <div class="preferences-grid">
+                    <div class="preference-card">
+                        <h3>🎯 Learning Goals</h3>
+                        <div class="form-group">
+                            <label for="skillLevel">Current Skill Level</label>
+                            <select id="skillLevel">
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate" selected>Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="learningPace">Preferred Learning Pace</label>
+                            <select id="learningPace">
+                                <option value="slow">Slow and Steady</option>
+                                <option value="moderate" selected>Moderate</option>
+                                <option value="fast">Fast Track</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="practiceTime">Daily Practice Time</label>
+                            <select id="practiceTime">
+                                <option value="15">15 minutes</option>
+                                <option value="30" selected>30 minutes</option>
+                                <option value="60">1 hour</option>
+                                <option value="120">2+ hours</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="preference-card">
+                        <h3>🎵 Instrument Focus</h3>
+                        <div class="instrument-preferences">
+                            <div class="instrument-pref">
+                                <label class="checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+                                <span>🪘 Traditional Nepali Instruments</span>
+                            </div>
+                            <div class="instrument-pref">
+                                <label class="checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+                                <span>🎸 Modern String Instruments</span>
+                            </div>
+                            <div class="instrument-pref">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <span>🎹 Keyboard Instruments</span>
+                            </div>
+                            <div class="instrument-pref">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <span>🥁 Percussion Instruments</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary">Save Preferences</button>
+            </div>
+
+            <div id="achievements" class="profile-section">
+                <div class="section-header">
+                    <h2>Achievements & Certificates</h2>
+                </div>
+                
+                <div class="achievements-grid">
+                    <div class="achievement-card earned">
+                        <div class="achievement-icon">🏆</div>
+                        <div class="achievement-info">
+                            <h3>First Steps</h3>
+                            <p>Completed your first lesson</p>
+                            <span class="date">Earned: Jan 16, 2025</span>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card earned">
+                        <div class="achievement-icon">🎵</div>
+                        <div class="achievement-info">
+                            <h3>Rhythm Master</h3>
+                            <p>Mastered basic Madal rhythms</p>
+                            <span class="date">Earned: Jan 20, 2025</span>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card earned">
+                        <div class="achievement-icon">📚</div>
+                        <div class="achievement-info">
+                            <h3>Dedicated Learner</h3>
+                            <p>Completed 10 lessons in a month</p>
+                            <span class="date">Earned: Jan 25, 2025</span>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🌟</div>
+                        <div class="achievement-info">
+                            <h3>Multi-Instrumentalist</h3>
+                            <p>Learn 3 different instruments</p>
+                            <span class="progress">Progress: 2/3</span>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🎖️</div>
+                        <div class="achievement-info">
+                            <h3>Cultural Ambassador</h3>
+                            <p>Master traditional Nepali music</p>
+                            <span class="progress">Progress: 60%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🏅</div>
+                        <div class="achievement-info">
+                            <h3>Master Musician</h3>
+                            <p>Complete advanced certification</p>
+                            <span class="progress">Locked</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificates-section">
+                    <h3>My Certificates</h3>
+                    <div class="certificates-list">
+                        <div class="certificate-item">
+                            <div class="certificate-icon">📜</div>
+                            <div class="certificate-info">
+                                <h4>Madal Basics Certification</h4>
+                                <p>Issued by Rhythm Music Academy</p>
+                                <span class="date">January 25, 2025</span>
+                            </div>
+                            <button class="btn btn-secondary btn-small">Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/profile.js"></script>
+  <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RhythmMusics</h3>
+                    <p>Your premier destination for musical instruments and education.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="products.html">Instruments</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="login.html">Student Login</a></li>
+                        <li><a href="teacher-login.html">Teacher Portal</a></li>
+                        <li><a href="admin-login.html">Admin Panel</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 RhythmMusics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RhythmMusics - Learn, Play, Create</title>
+
+    <!-- Use Thymeleaf th:href to link CSS -->
+    <link th:href="@{/styles/main.css}" rel="stylesheet">
+    <link th:href="@{/styles/index.css}" rel="stylesheet">
+    <link th:href="@{/styles/responsive.css}" rel="stylesheet">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img th:src="@{/assets/logo.png}" alt="Logo">
+            </div>
+            <ul class="nav-menu">
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/products}">Instruments</a></li>
+                <li><a th:href="@{/courses}">Courses</a></li>
+                <li><a th:href="@{/about}">About</a></li>
+                <li><a th:href="@{/contact}">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a th:href="@{/cart}" class="cart-icon">🛒 <span class="cart-count">0</span></a>
+                <div class="login-dropdown">
+                    <button class="login-btn">Login</button>
+                    <a th:href="@{/signup}" class="btn btn-primary">Sign Up</a>
+                    <div class="dropdown-menu">
+                        <a th:href="@{/login}">Student Login</a>
+                        <a th:href="@{/teacher-login}">Teacher Login</a>
+                        <a th:href="@{/admin-login}">Admin Login</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Master Traditional Nepali & Modern Musical Instruments</h1>
+            <p>Connect with expert teachers and learn the art of music with authentic Nepali instruments and modern classics</p>
+            <div class="hero-buttons">
+                <a th:href="@{/signup}" class="btn btn-primary">Start Learning</a>
+                <a href="#instruments" class="btn btn-secondary">Explore Instruments</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="instrument-showcase">
+                <div class="instrument-card">🎻</div>
+                <div class="instrument-card">🪘</div>
+                <div class="instrument-card">🎸</div>
+                <div class="instrument-card">🎹</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="instruments" class="instruments">
+        <div class="container">
+            <h2>Featured Instruments</h2>
+            <div class="instruments-grid">
+                <div class="instrument-item">
+                    <div class="instrument-icon">🪘</div>
+                    <h3>Madal</h3>
+                    <p>Traditional Nepali percussion instrument</p>
+                </div>
+                <div class="instrument-item">
+                    <div class="instrument-icon">🎻</div>
+                    <h3>Sarangi</h3>
+                    <p>Classical Nepali string instrument</p>
+                </div>
+                <div class="instrument-item">
+                    <div class="instrument-icon">🎸</div>
+                    <h3>Guitar</h3>
+                    <p>Modern acoustic and electric guitars</p>
+                </div>
+                <div class="instrument-item">
+                    <div class="instrument-icon">🎹</div>
+                    <h3>Piano</h3>
+                    <p>Classical and modern piano lessons</p>
+                </div>
+                <div class="instrument-item">
+                    <div class="instrument-icon">🥁</div>
+                    <h3>Drums</h3>
+                    <p>Complete drum set training</p>
+                </div>
+                <div class="instrument-item">
+                    <div class="instrument-icon">🎺</div>
+                    <h3>Flute</h3>
+                    <p>Traditional bamboo and modern flutes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Products -->
+    <section class="popular-products">
+        <div class="container">
+            <h2>Popular Instruments</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img th:src="@{https://images.pexels.com/photos/1407322/pexels-photo-1407322.jpeg?auto=compress&cs=tinysrgb&w=400}" alt="Acoustic Guitar">
+                    <div class="product-info">
+                        <h3>Acoustic Guitar</h3>
+                        <p class="price">$299.99</p>
+                        <button class="btn btn-primary add-to-cart" data-product="Acoustic Guitar" data-price="299.99">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img th:src="@{https://images.pexels.com/photos/164743/pexels-photo-164743.jpeg?auto=compress&cs=tinysrgb&w=400}" alt="Piano Keyboard">
+                    <div class="product-info">
+                        <h3>Digital Piano</h3>
+                        <p class="price">$899.99</p>
+                        <button class="btn btn-primary add-to-cart" data-product="Digital Piano" data-price="899.99">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img th:src="@{https://images.pexels.com/photos/210764/pexels-photo-210764.jpeg?auto=compress&cs=tinysrgb&w=400}" alt="Drums">
+                    <div class="product-info">
+                        <h3>Drum Set</h3>
+                        <p class="price">$1,299.99</p>
+                        <button class="btn btn-primary add-to-cart" data-product="Drum Set" data-price="1299.99">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose RhythmMusics?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎸</div>
+                    <h3>Premium Instruments</h3>
+                    <p>Curated selection of high-quality musical instruments from renowned brands worldwide.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Expert Teachers</h3>
+                    <p>Learn from professional musicians and certified instructors with years of experience.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Interactive Learning</h3>
+                    <p>Engaging online courses with video lessons, quizzes, and personalized feedback.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Community</h3>
+                    <p>Join a vibrant community of music lovers and share your musical journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>RhythmMusics</h3>
+                <p>Your premier destination for musical instruments and education.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a th:href="@{/products}">Instruments</a></li>
+                    <li><a th:href="@{/courses}">Courses</a></li>
+                    <li><a th:href="@{/about}">About Us</a></li>
+                    <li><a th:href="@{/contact}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Account</h4>
+                <ul>
+                    <li><a th:href="@{/login}">Student Login</a></li>
+                    <li><a th:href="@{/teacher-login}">Teacher Portal</a></li>
+                    <li><a th:href="@{/admin-login}">Admin Panel</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 RhythmMusics. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Thymeleaf script import -->
+<script th:src="@{/scripts/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - RhythmMusics</title>
+
+    <!-- CSS (from static/css) -->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/responsive.css}">
+</head>
+<body>
+<div class="page-container">
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <!-- Image (from static/images) -->
+                    <img th:src="@{/images/logo.png}" alt="RhythmMusics Logo">
+                </div>
+                <ul class="nav-menu">
+                    <li><a th:href="@{/index}">Home</a></li>
+                    <li><a th:href="@{/products}">Instruments</a></li>
+                    <li><a th:href="@{/courses}">Courses</a></li>
+                    <li><a th:href="@{/about}" class="active">About</a></li>
+                    <li><a th:href="@{/contact}">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a th:href="@{/cart}" class="cart-icon">🛒 <span class="cart-count">0</span></a>
+                    <div class="login-dropdown">
+                        <button class="login-btn">Login</button>
+                        <div class="dropdown-menu">
+                            <a th:href="@{/login}">Student Login</a>
+                            <a th:href="@{/teacher-login}">Teacher Login</a>
+                            <a th:href="@{/admin-login}">Admin Login</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">About RhythmMusics</h1>
+
+            <section class="about-content">
+                <div class="card">
+                    <h2>Our Mission</h2>
+                    <p>At RhythmMusics, we believe that music has the power to transform lives. Our mission is to make quality musical education and instruments accessible to everyone, regardless of their background or experience level.</p>
+
+                    <h2>What We Offer</h2>
+                    <ul style="list-style-type: disc; margin-left: var(--spacing-lg); color: var(--neutral-600);">
+                        <li>Premium musical instruments from trusted brands</li>
+                        <li>Comprehensive online music courses</li>
+                        <li>Expert instruction from certified professionals</li>
+                        <li>Interactive learning platform with progress tracking</li>
+                        <li>Supportive community of music enthusiasts</li>
+                    </ul>
+
+                    <h2>Our Story</h2>
+                    <p>Founded in 2020 by a group of passionate musicians and educators, RhythmMusics started as a small music school and has grown into a comprehensive online platform serving thousands of students worldwide. We combine traditional teaching methods with modern technology to create an engaging and effective learning experience.</p>
+
+                    <h2>Why Choose Us?</h2>
+                    <div class="features-grid mt-lg">
+                        <div class="feature-card">
+                            <div class="feature-icon">🏆</div>
+                            <h3>Quality Guaranteed</h3>
+                            <p>Every instrument is carefully selected and quality-tested before shipping.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">👨‍🏫</div>
+                            <h3>Expert Teachers</h3>
+                            <p>Learn from professional musicians with years of teaching experience.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📱</div>
+                            <h3>Modern Platform</h3>
+                            <p>User-friendly interface with the latest e-learning technology.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🤝</div>
+                            <h3>Community Support</h3>
+                            <p>Join a vibrant community of learners and experienced musicians.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RhythmMusics</h3>
+                    <p>Your premier destination for musical instruments and education.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a th:href="@{/products}">Instruments</a></li>
+                        <li><a th:href="@{/courses}">Courses</a></li>
+                        <li><a th:href="@{/about}">About Us</a></li>
+                        <li><a th:href="@{/contact}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a th:href="@{/login}">Student Login</a></li>
+                        <li><a th:href="@{/teacher-login}">Teacher Portal</a></li>
+                        <li><a th:href="@{/admin-login}">Admin Panel</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 RhythmMusics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- JS (from static/js) -->
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

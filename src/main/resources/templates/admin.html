@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Rhythm Musics</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-music"></i>
+                    <span>Rhythm Musics</span>
+                </a>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="shop.html" class="nav-link">Shop</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="#about" class="nav-link">About Us</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            
+            <div class="nav-actions">
+                <a href="cart.html" class="nav-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <a href="#notifications" class="nav-icon">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <a href="#messages" class="nav-icon">
+                    <i class="fas fa-comment"></i>
+                </a>
+                
+                <div class="user-menu" id="userMenu">
+                    <div class="user-avatar" onclick="toggleDropdown()">
+                        <span id="userInitial">A</span>
+                    </div>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="admin-dashboard.html" class="active">Dashboard</a>
+                        <a href="#profile">Profile</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h1><i class="fas fa-cog"></i> Admin Dashboard</h1>
+                    <div class="welcome-message">
+                        <span>Welcome back, <strong id="adminName">Mike Admin</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background: linear-gradient(135deg, #3b82f6, #1e40af);">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-card-content">
+                        <h3 id="totalUsers">15,247</h3>
+                        <p>Total Users</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                        <i class="fas fa-guitar"></i>
+                    </div>
+                    <div class="stat-card-content">
+                        <h3 id="totalProducts">1,245</h3>
+                        <p>Products</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="stat-card-content">
+                        <h3 id="totalCourses">892</h3>
+                        <p>Active Courses</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-card-content">
+                        <h3 id="monthlyRevenue">$45,230</h3>
+                        <p>Monthly Revenue</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Tabs -->
+            <div class="admin-tabs">
+                <div class="tab-navigation">
+                    <button class="tab-btn active" onclick="showTab('users')">
+                        <i class="fas fa-users"></i> User Management
+                    </button>
+                    <button class="tab-btn" onclick="showTab('products')">
+                        <i class="fas fa-guitar"></i> Product Management
+                    </button>
+                    <button class="tab-btn" onclick="showTab('courses')">
+                        <i class="fas fa-book"></i> Course Management
+                    </button>
+                    <button class="tab-btn" onclick="showTab('reports')">
+                        <i class="fas fa-chart-bar"></i> Reports
+                    </button>
+                </div>
+
+                <!-- Users Tab -->
+                <div class="tab-content active" id="usersTab">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h2><i class="fas fa-users"></i> User Management</h2>
+                            <div class="header-actions">
+                                <button class="btn btn-small btn-orange" onclick="exportUsers()">
+                                    <i class="fas fa-download"></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        <div class="dashboard-card-content">
+                            <div class="table-filters">
+                                <input type="text" id="userSearchInput" placeholder="Search users..." class="search-input">
+                                <select id="userRoleFilter">
+                                    <option value="all">All Roles</option>
+                                    <option value="student">Students</option>
+                                    <option value="teacher">Teachers</option>
+                                    <option value="admin">Admins</option>
+                                </select>
+                                <select id="userStatusFilter">
+                                    <option value="all">All Status</option>
+                                    <option value="active">Active</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="blocked">Blocked</option>
+                                </select>
+                            </div>
+                            <div class="table-container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>Join Date</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="usersTableBody">
+                                        <!-- Users will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Tab -->
+                <div class="tab-content" id="productsTab">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h2><i class="fas fa-guitar"></i> Product Management</h2>
+                            <div class="header-actions">
+                                <button class="btn btn-small btn-primary" onclick="openModal('addProductModal')">
+                                    <i class="fas fa-plus"></i> Add Product
+                                </button>
+                            </div>
+                        </div>
+                        <div class="dashboard-card-content">
+                            <div class="table-filters">
+                                <input type="text" id="productSearchInput" placeholder="Search products..." class="search-input">
+                                <select id="productCategoryFilter">
+                                    <option value="all">All Categories</option>
+                                    <option value="guitar">Guitars</option>
+                                    <option value="piano">Pianos</option>
+                                    <option value="drums">Drums</option>
+                                    <option value="strings">Strings</option>
+                                </select>
+                                <select id="productStatusFilter">
+                                    <option value="all">All Status</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="pending">Pending Approval</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                            </div>
+                            <div class="table-container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Category</th>
+                                            <th>Price</th>
+                                            <th>Status</th>
+                                            <th>Added</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="productsTableBody">
+                                        <!-- Products will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Courses Tab -->
+                <div class="tab-content" id="coursesTab">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h2><i class="fas fa-book"></i> Course Management</h2>
+                        </div>
+                        <div class="dashboard-card-content">
+                            <div class="table-filters">
+                                <input type="text" id="courseSearchInput" placeholder="Search courses..." class="search-input">
+                                <select id="courseStatusFilter">
+                                    <option value="all">All Status</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="pending">Pending Approval</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                                <select id="courseTeacherFilter">
+                                    <option value="all">All Teachers</option>
+                                    <!-- Teacher options will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="table-container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Course</th>
+                                            <th>Teacher</th>
+                                            <th>Students</th>
+                                            <th>Rating</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminCoursesTableBody">
+                                        <!-- Courses will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Tab -->
+                <div class="tab-content" id="reportsTab">
+                    <div class="reports-grid">
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header">
+                                <h2><i class="fas fa-chart-line"></i> Revenue Analytics</h2>
+                            </div>
+                            <div class="dashboard-card-content">
+                                <div class="chart-placeholder">
+                                    <i class="fas fa-chart-area"></i>
+                                    <p>Revenue chart would be displayed here</p>
+                                    <div class="revenue-stats">
+                                        <div class="revenue-item">
+                                            <span class="revenue-label">This Month:</span>
+                                            <span class="revenue-value">$45,230</span>
+                                        </div>
+                                        <div class="revenue-item">
+                                            <span class="revenue-label">Last Month:</span>
+                                            <span class="revenue-value">$38,950</span>
+                                        </div>
+                                        <div class="revenue-item success">
+                                            <span class="revenue-label">Growth:</span>
+                                            <span class="revenue-value">+16.1%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header">
+                                <h2><i class="fas fa-users"></i> User Statistics</h2>
+                            </div>
+                            <div class="dashboard-card-content">
+                                <div class="user-stats">
+                                    <div class="user-stat-item">
+                                        <span class="stat-number">12,456</span>
+                                        <span class="stat-label">Students</span>
+                                    </div>
+                                    <div class="user-stat-item">
+                                        <span class="stat-number">234</span>
+                                        <span class="stat-label">Teachers</span>
+                                    </div>
+                                    <div class="user-stat-item">
+                                        <span class="stat-number">557</span>
+                                        <span class="stat-label">New This Month</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header">
+                                <h2><i class="fas fa-shopping-bag"></i> Top Products</h2>
+                            </div>
+                            <div class="dashboard-card-content">
+                                <div class="top-products" id="topProductsList">
+                                    <!-- Top products will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header">
+                                <h2><i class="fas fa-graduation-cap"></i> Course Performance</h2>
+                            </div>
+                            <div class="dashboard-card-content">
+                                <div class="course-performance" id="coursePerformanceList">
+                                    <!-- Course performance will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Product Modal -->
+    <div class="modal" id="addProductModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Add New Product</h3>
+                <button class="modal-close" onclick="closeModal('addProductModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addProductForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productName">Product Name</label>
+                            <input type="text" id="productName" required placeholder="e.g., Gibson Les Paul Standard">
+                        </div>
+                        <div class="form-group">
+                            <label for="productBrand">Brand</label>
+                            <input type="text" id="productBrand" required placeholder="e.g., Gibson">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productDescription">Description</label>
+                        <textarea id="productDescription" rows="4" placeholder="Product description..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productPrice">Price ($)</label>
+                            <input type="number" id="productPrice" min="0" step="0.01" required placeholder="299.99">
+                        </div>
+                        <div class="form-group">
+                            <label for="productCategory">Category</label>
+                            <select id="productCategory" required>
+                                <option value="">Select category...</option>
+                                <option value="guitar">Guitars</option>
+                                <option value="piano">Pianos</option>
+                                <option value="drums">Drums</option>
+                                <option value="strings">Strings</option>
+                                <option value="wind">Wind Instruments</option>
+                                <option value="keyboard">Keyboards</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productImage">Product Image URL</label>
+                        <input type="url" id="productImage" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productStock">Stock Quantity</label>
+                            <input type="number" id="productStock" min="0" required placeholder="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="productStatus">Status</label>
+                            <select id="productStatus">
+                                <option value="approved">Approved</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('addProductModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="addProduct()">Add Product</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i class="fas fa-music"></i>
+                        <span>Rhythm Musics</span>
+                    </div>
+                    <p>Your premier destination for musical instruments and professional music education.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">
+                        <p>Email: info@rhythmmusics.com</p>
+                        <p>Phone: (555) 123-4567</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="admin-dashboard.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

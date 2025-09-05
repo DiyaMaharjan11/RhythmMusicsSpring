@@ -21,7 +21,7 @@ public class Cart {
     private int id;
 
     //Product name
-    private String name;
+    private String cartName;
     //Image of product
     private String imageName;
     //Status Available or not

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Rhythm Music</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <img src="assets/logo.png">
+            <h2>Create Account</h2>
+            <p>Join our musical community today</p>
+        </div>
+
+        <!-- ✅ Form mapped to User object -->
+        <form class="auth-form" th:action="@{/signup}" th:object="${user}" method="post">
+
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" th:field="*{fullName}" id="fullName" required>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" th:field="*{email}" id="email" required>
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" th:field="*{phone}" id="phone" required>
+            </div>
+
+            <!-- User Type -->
+            <div class="form-group">
+                <label for="userType">Join as</label>
+                <select th:field="*{userType}" id="userType" required>
+                    <option value="">Select Role</option>
+                    <option value="user">User (Customer)</option>
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" th:field="*{password}" id="password" required>
+            </div>
+
+            <!-- Confirm Password (not part of User object, just extra input) -->
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+
+            <!-- Terms -->
+            <div class="checkbox-group">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">I agree to the Terms of Service and Privacy Policy</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Account</button>
+
+            <!-- Error message (if password mismatch) -->
+            <div th:if="${error}" class="error-message">
+                <p th:text="${error}"></p>
+            </div>
+
+            <div class="form-footer">
+                <p>Already have an account? <a th:href="@{/login}">Sign in here</a></p>
+                <a th:href="@{/}">← Back to Home</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="auth-sidebar">
+        <div class="sidebar-content">
+            <h3>Why Choose Rhythm Music?</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🎼</span>
+                    <span>Learn Traditional Nepali Instruments</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎸</span>
+                    <span>Modern Instrument Lessons</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🌟</span>
+                    <span>Certified Instructors</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📱</span>
+                    <span>Flexible Online Learning</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

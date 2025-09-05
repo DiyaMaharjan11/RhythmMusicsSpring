@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - RhythmMusics</title>
+    <link rel="stylesheet" href="styles/main.css">
+     <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+  <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <img src="assets/logo.png ">
+                <h2>Welcome Back</h2>
+                <p>Sign in to continue your musical journey</p>
+            </div>
+            
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userType">Login as</label>
+                    <select id="userType" name="userType" required>
+                        <option value="">Select Role</option>
+                        <option value="user">User (Customer)</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+                    <a href="index.html">← Back to Home</a>
+                </div>
+            </form>
+        </div>
+        
+        <div class="auth-sidebar">
+            <div class="sidebar-content">
+                <h3>Join Our Musical Community</h3>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">🎯</span>
+                        <span>Personalized Learning</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">👨‍🏫</span>
+                        <span>Expert Teachers</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🏆</span>
+                        <span>Cultural Heritage</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🎵</span>
+                        <span>Traditional & Modern</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+</body>
+</html>

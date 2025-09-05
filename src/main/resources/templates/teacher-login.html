@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Login - RhythmMusics</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header -->
+        <header class="header">
+            <nav class="navbar">
+                <div class="nav-container">
+                    <div class="nav-logo">
+                        <a href="index.html"><h2>🎵 RhythmMusics</h2></a>
+                    </div>
+                    <div class="nav-actions">
+                        <a href="index.html" class="btn btn-secondary">Back to Home</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <h1 class="page-title">Teacher Portal</h1>
+                
+                <div class="form-container">
+                    <div class="text-center mb-lg">
+                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🎓</div>
+                        <h3>Welcome Back, Educator</h3>
+                    </div>
+                    
+                    <form id="teacherLoginForm">
+                        <div class="form-group">
+                            <label for="teacher-email">Teacher Email</label>
+                            <input type="email" id="teacher-email" name="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="teacher-password">Password</label>
+                            <input type="password" id="teacher-password" name="password" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="teacher-id">Teacher ID</label>
+                            <input type="text" id="teacher-id" name="teacherId" class="form-input" required placeholder="TCH-XXXXX">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary form-submit">Access Teacher Dashboard</button>
+                        
+                        <div class="text-center mt-lg">
+                            <p>Need teacher access? <a href="contact.html">Contact Administration</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 RhythmMusics. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="scripts/teacher-auth.js"></script>
+</body>
+</html>

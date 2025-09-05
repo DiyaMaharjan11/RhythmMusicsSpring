@@ -13,13 +13,12 @@ public class CartService {
 
     //save
     public Cart saveCart(Cart cart) {
+
         return cartRepository.save(cart);
     }
 
     public boolean existCart(String cartName) {
-        return cartRepository.exists(cartName);
+        return cartRepository.existsByCartName(cartName);
     }
-
-
 
 }

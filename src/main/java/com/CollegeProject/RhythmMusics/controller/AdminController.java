@@ -33,7 +33,7 @@ public class AdminController {
         String imageName = file!=null ? file.getOriginalFilename(): "default.jpg";
         cart.setImageName(imageName);
 
-        if(cartService.existCart(cart.getName())) {
+        if(cartService.existCart(cart.getCartName())) {
             session.setAttribute("errorMsg", "Cart Name Already Exists");
         }else {
             Cart saveCart = cartService.saveCart(cart);
