@@ -33,6 +33,6 @@ public class UserController {
         }
 
         userRepository.save(user);
-        return "redirect:/login"; // after success
+        return "login"; // after success
     }
 }

@@ -1,5 +1,3 @@
-
-
 /* CSS Variables for consistent theming */
 :root {
     --primary-color: #6B46C1;
@@ -377,8 +375,8 @@ p {
 .product-info {
     padding: var(--spacing-lg);
      display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  flex-direction: column; 
+  gap: 0.5rem;  
 }
 
 
@@ -727,3 +725,104 @@ p {
     border-color: var(--warning-color);
     color: var(--warning-color);
 }
+
+
+//courses
+
+
+    const courseStyles = `
+        .enrollment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+        }
+        
+        .enrollment-modal .modal-overlay {
+            background: rgba(0, 0, 0, 0.8);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-md);
+        }
+        
+        .enrollment-modal .modal-content {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        .course-details {
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .course-details h3 {
+            color: var(--neutral-800);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .course-price {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .enrollment-actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+        
+        .course-level {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .course-level[data-level="beginner"] {
+            background-color: var(--accent-color);
+        }
+        
+        .course-level[data-level="intermediate"] {
+            background-color: var(--warning-color);
+        }
+        
+        .course-level[data-level="advanced"] {
+            background-color: var(--error-color);
+        }
+    `;
+
+     
+    const progressStyles = `
+        .progress-bar {
+            margin: var(--spacing-md) 0;
+        }
+        
+        .progress-label {
+            font-size: var(--font-size-sm);
+            color: var(--neutral-600);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .progress-track {
+            background-color: var(--neutral-200);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background-color: var(--accent-color);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+    `;

@@ -1,5 +1,7 @@
 package com.CollegeProject.RhythmMusics.controller;
 
+import ch.qos.logback.core.model.Model;
+import com.CollegeProject.RhythmMusics.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,10 +13,6 @@ public class HomeController {
         return "index"; // Spring will look for index.css.html in templates
     }
 
-    @GetMapping("/about")
-    public String aboutPage() {
-        return "about"; // this will render about.html from templates
-    }
 
     @GetMapping("/login")
     public String studentLogin() {
@@ -31,11 +29,6 @@ public class HomeController {
         return "admin-login"; // looks for admin-login.html in templates
     }
 
-    @GetMapping("/signup")
-     public String signupPage() {
-        return "signup";
-    }
-
     @GetMapping("/products")
     public String productPage() {
         return "products";
@@ -45,6 +38,14 @@ public class HomeController {
     public String coursesPage() {
         return "courses";
     }
+
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "about"; // this will render about.html from templates
+    }
+
+
+
 
 
 }
