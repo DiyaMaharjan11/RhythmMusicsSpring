@@ -1,7 +1,5 @@
 package com.CollegeProject.RhythmMusics.controller;
 
-import ch.qos.logback.core.model.Model;
-import com.CollegeProject.RhythmMusics.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -18,6 +16,7 @@ public class HomeController {
     public String studentLogin() {
         return "login"; // looks for login.html in templates
     }
+
 
     @GetMapping("/teacher-login")
     public String teacherLogin() {
