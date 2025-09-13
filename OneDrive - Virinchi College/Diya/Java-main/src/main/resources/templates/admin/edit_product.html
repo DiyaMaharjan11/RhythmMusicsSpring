@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TO Edit_Product</title>
+</head>
+<body>
+<div class="container-fluid px-4">
+<!-- Page Header -->
+<div class="page-header">
+    <h1 class="page-title">
+        <i class="fas fa-edit me-3"></i>Edit Product
+    </h1>
+    <p class="page-subtitle">Update product information and specifications</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <div class="form-container">
+            <div class="form-header">
+                <h4><i class="fas fa-box me-2"></i>Update Product Details</h4>
+            </div>
+
+            <!-- Success/Error Messages -->
+            <th:block th:if="${session.succMsg}">
+                <div class="alert-modern alert-success-modern">
+                    <i class="fas fa-check-circle me-2"></i>[[${session.succMsg}]]
+                </div>
+                <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+            </th:block>
+
+            <th:block th:if="${session.errorMsg}">
+                <div class="alert-modern alert-danger-modern">
+                    <i class="fas fa-exclamation-circle me-2"></i>[[${session.errorMsg}]]
+                </div>
+                <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+            </th:block>
+
+            <form action="/admin/updateProduct" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" th:value="${product.id}">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-tag me-2"></i>Product Title
+                            </label>
+                            <input type="text" name="title" th:value="${product.title}"
+                                   class="form-control form-control-modern"
+                                   placeholder="Enter product title" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-list me-2"></i>Category
+                            </label>
+                            <select name="category" class="form-control form-control-modern" required>
+                                <option th:value="${product.category}" selected>[[${product.category}]]</option>
+                                <option th:each="c:${categories}" th:value="${c.name}"
+                                        th:if="${c.name != product.category}">[[${c.name}]]</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-align-left me-2"></i>Product Description
+                    </label>
+                    <textarea name="description" rows="4" class="form-control form-control-modern"
+                              placeholder="Enter detailed product description">[[${product.description}]]</textarea>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-dollar-sign me-2"></i>Price
+                            </label>
+                            <input type="number" name="price" th:value="${product.price}"
+                                   class="form-control form-control-modern"
+                                   placeholder="0.00" step="0.01" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-warehouse me-2"></i>Stock Quantity
+                            </label>
+                            <input type="number" name="stock" th:value="${product.stock}"
+                                   class="form-control form-control-modern"
+                                   placeholder="0" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-toggle-on me-2"></i>Status
+                            </label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" value="true" name="isActive" id="productActive"
+                                           th:checked="${product.isActive==true}">
+                                    <label for="productActive">Active</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" value="false" name="isActive" id="productInactive"
+                                           th:checked="${product.isActive==false}">
+                                    <label for="productInactive">Inactive</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Image Display -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-image me-2"></i>Current Product Image
+                    </label>
+                    <div class="text-center mb-3">
+                        <img th:src="@{'.../uploads/product_img/'+${product.image}}"
+                             class="product-image" width="150px" height="150px"
+                             th:alt="${product.title}"
+                             style="border: 3px solid #e2e8f0; border-radius: 15px; object-fit: cover;">
+                        <p class="small text-muted mt-2">Current product image</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-upload me-2"></i>Upload New Image (Optional)
+                    </label>
+                    <div class="file-upload-container">
+                        <input type="file" name="file" class="file-upload-input" accept="image/*">
+                        <label class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            Click to upload new product image
+                            <small class="d-block mt-1">Leave empty to keep current image</small>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-3">
+                    <button type="submit" class="btn btn-modern-primary flex-fill">
+                        <i class="fas fa-save me-2"></i>Update Product
+                    </button>
+                    <a href="/admin/products" class="btn btn-modern-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Products
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

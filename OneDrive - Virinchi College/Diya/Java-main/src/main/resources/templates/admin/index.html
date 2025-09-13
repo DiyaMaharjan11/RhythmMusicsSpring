@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<div class="container-fluid px-4">
+    <!-- Welcome Banner -->
+    <div class="welcome-banner text-center">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="dashboard-title">
+                    <i class="fas fa-tachometer-alt me-3"></i>Admin Dashboard
+                </h1>
+                <p class="dashboard-subtitle mb-0">
+                    Welcome back! Manage your RhythmMusic store efficiently with our comprehensive admin tools.
+                </p>
+            </div>
+            <div class="col-md-4 text-end">
+                <div class="pulse-animation">
+                    <i class="fas fa-crown fa-4x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Main Admin Actions -->
+    <div class="row">
+        <!-- Product Management -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <a href="/admin/loadAddProduct" class="text-decoration-none">
+                <div class="admin-card text-center">
+                    <i class="admin-card-icon fas fa-plus-square text-primary-custom"></i>
+                    <h5 class="admin-card-title">Add New Product</h5>
+                    <p class="admin-card-description">Create and add new products to your inventory with detailed specifications and images.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
+            <a href="/admin/products" class="text-decoration-none">
+                <div class="admin-card text-center">
+                    <i class="admin-card-icon fas fa-list-alt text-success-custom"></i>
+                    <h5 class="admin-card-title">Manage Products</h5>
+                    <p class="admin-card-description">View, edit, and manage all your existing products in one centralized location.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Category Management -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <a href="/admin/category" class="text-decoration-none">
+                <div class="admin-card text-center">
+                    <i class="admin-card-icon fas fa-tags text-warning-custom"></i>
+                    <h5 class="admin-card-title">Manage Categories</h5>
+                    <p class="admin-card-description">Organize your products by creating and managing product categories effectively.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Order Management -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <a href="#" class="text-decoration-none">
+                <div class="admin-card text-center">
+                    <i class="admin-card-icon fas fa-box-open text-info-custom"></i>
+                    <h5 class="admin-card-title">Order Management</h5>
+                    <p class="admin-card-description">Track, process, and manage customer orders with detailed order information.</p>
+                    <small class="text-muted"><i class="fas fa-clock me-1"></i>Coming Soon</small>
+                </div>
+            </a>
+        </div>
+
+        <!-- User Management -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <a href="#" class="text-decoration-none">
+                <div class="admin-card text-center">
+                    <i class="admin-card-icon fas fa-users text-danger-custom"></i>
+                    <h5 class="admin-card-title">User Management</h5>
+                    <p class="admin-card-description">Manage customer accounts, view user activity, and handle user-related operations.</p>
+                    <small class="text-muted"><i class="fas fa-clock me-1"></i>Coming Soon</small>
+                </div>
+            </a>
+        </div>
+
+
+    </div>
+
+    <!-- Quick Actions Panel -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="quick-actions">
+                <h5><i class="fas fa-bolt me-2 text-primary-custom"></i>Quick Actions</h5>
+                <div class="d-flex flex-wrap">
+                    <a href="/admin/loadAddProduct" class="btn btn-primary btn-modern primary-gradient text-white">
+                        <i class="fas fa-plus me-2"></i>Add Product
+                    </a>
+                    <a href="/admin/category" class="btn btn-warning btn-modern warning-gradient text-white">
+                        <i class="fas fa-tags me-2"></i>Add Category
+                    </a>
+                    <a href="/admin/products" class="btn btn-success btn-modern success-gradient text-white">
+                        <i class="fas fa-eye me-2"></i>View Products
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="activity-feed">
+                <h5><i class="fas fa-bell me-2 text-primary-custom"></i>Recent Activity</h5>
+                <div class="activity-item">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-plus-circle text-success me-3"></i>
+                        <div>
+                            <small class="text-muted">2 hours ago</small>
+                            <p class="mb-0 small">New product added to inventory</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-edit text-primary me-3"></i>
+                        <div>
+                            <small class="text-muted">5 hours ago</small>
+                            <p class="mb-0 small">Category updated successfully</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-shopping-cart text-warning me-3"></i>
+                        <div>
+                            <small class="text-muted">1 day ago</small>
+                            <p class="mb-0 small">New order received</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

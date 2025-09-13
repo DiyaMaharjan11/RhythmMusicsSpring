@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Courses - RhythmMusics</title>
+    <link rel="stylesheet" href="styles/main.css">
+ 
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header -->
+        <header class="header">
+            <nav class="navbar">
+                <div class="nav-container">
+                    <div class="nav-logo">
+                          <img src="assets/logo.png ">
+                    </div>
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Instruments</a></li>
+                        <li><a href="courses.html" class="active">Courses</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <div class="nav-actions">
+                        <a href="cart.html" class="cart-icon">🛒 <span class="cart-count">0</span></a>
+                        <div class="login-dropdown">
+                            <button class="login-btn">Login</button>
+                            <div class="dropdown-menu">
+                                <a href="login.html">Student Login</a>
+                                <a href="teacher-login.html">Teacher Login</a>
+                                <a href="admin-login.html">Admin Login</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <h1 class="page-title">Music Courses</h1>
+                
+                <!-- Course Categories -->
+                <div class="course-categories">
+                    <div class="category-filters">
+                        <button class="btn btn-secondary active" data-filter="all">All Courses</button>
+                        <button class="btn btn-secondary" data-filter="beginner">Beginner</button>
+                        <button class="btn btn-secondary" data-filter="intermediate">Intermediate</button>
+                        <button class="btn btn-secondary" data-filter="advanced">Advanced</button>
+                    </div>
+                </div>
+
+                <!-- Courses Grid -->
+                <div class="grid" id="coursesGrid">
+                    <div class="course-card" data-level="beginner">
+                        <img src="https://images.pexels.com/photos/1751731/pexels-photo-1751731.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Guitar Basics">
+                        <div class="course-info">
+                            <h3>Guitar Basics for Beginners</h3>
+                            <p>Learn fundamental guitar techniques, chords, and your first songs in this comprehensive beginner course.</p>
+                            <div class="course-meta">
+                                <span class="course-level">Beginner</span>
+                                <span class="course-duration">8 weeks</span>
+                            </div>
+                            <p class="price">$79.99</p>
+                            <button class="btn btn-accent">Enroll Now</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-level="intermediate">
+                        <img src="assets/images/pianoPerformance.png" alt="Piano Intermediate">
+                        <div class="course-info">
+                            <h3>Piano Performance Mastery</h3>
+                            <p>Advance your piano skills with complex pieces, music theory, and performance techniques.</p>
+                            <div class="course-meta">
+                                <span class="course-level">Intermediate</span>
+                                <span class="course-duration">12 weeks</span>
+                            </div>
+                            <p class="price">$129.99</p>
+                            <button class="btn btn-accent">Enroll Now</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-level="beginner">
+                        <img src="https://images.pexels.com/photos/442540/pexels-photo-442540.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Vocals">
+                        <div class="course-info">
+                            <h3>Vocal Training Fundamentals</h3>
+                            <p>Develop proper breathing, pitch control, and vocal techniques with professional guidance.</p>
+                            <div class="course-meta">
+                                <span class="course-level">Beginner</span>
+                                <span class="course-duration">10 weeks</span>
+                            </div>
+                            <p class="price">$99.99</p>
+                            <button class="btn btn-accent">Enroll Now</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-level="advanced">
+                        <img src="assets/images/Jazztheory.png" alt="Jazz Theory">
+                        <div class="course-info">
+                            <h3>Advanced Jazz Theory</h3>
+                            <p>Explore complex harmonies, improvisation techniques, and jazz composition methods.</p>
+                            <div class="course-meta">
+                                <span class="course-level">Advanced</span>
+                                <span class="course-duration">16 weeks</span>
+                            </div>
+                            <p class="price">$199.99</p>
+                            <button class="btn btn-accent">Enroll Now</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-level="intermediate">
+                        <img src="assets/images/musicProduction.png" alt="Music Production">
+                        <div class="course-info">
+                            <h3>Digital Music Production</h3>
+                            <p>Learn modern music production techniques using industry-standard software and equipment.</p>
+                            <div class="course-meta">
+                                <span class="course-level">Intermediate</span>
+                                <span class="course-duration">14 weeks</span>
+                            </div>
+                            <p class="price">$159.99</p>
+                            <button class="btn btn-accent">Enroll Now</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-level="beginner">
+                        <img src="assets/images/drumfundamental.png" alt="Drum Lessons">
+                        <div class="course-info">
+                            <h3>Drum Fundamentals</h3>
+                            <p>Master basic rhythms, fills, and coordination in this structured drum course.</p>
+                            <div class="course-meta">
+                                <span class="course-level">Beginner</span>
+                                <span class="course-duration">6 weeks</span>
+                            </div>
+                            <p class="price">$69.99</p>
+                            <button class="btn btn-accent">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 RhythmMusics. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/courses.js"></script>
+    
+</body>
+</html>

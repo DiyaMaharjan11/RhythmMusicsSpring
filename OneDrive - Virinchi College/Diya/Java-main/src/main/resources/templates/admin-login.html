@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - RhythmMusics</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header -->
+        <header class="header">
+            <nav class="navbar">
+                <div class="nav-container">
+                    <div class="nav-logo">
+                         <img src="assets/logo.png ">
+                    </div>
+                    <div class="nav-actions">
+                        <a href="index.html" class="btn btn-secondary">Back to Home</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <h1 class="page-title">Administrative Access</h1>
+                
+                <div class="form-container">
+                    <div class="text-center mb-lg">
+                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🔐</div>
+                        <h3>Admin Panel Access</h3>
+                        <p style="color: var(--warning-color); font-weight: 500;">Authorized Personnel Only</p>
+                    </div>
+                    
+                    <form id="adminLoginForm">
+                        <div class="form-group">
+                            <label for="admin-email">Administrator Email</label>
+                            <input type="email" id="admin-email" name="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="admin-password">Password</label>
+                            <input type="password" id="admin-password" name="password" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="admin-code">Admin Access Code</label>
+                            <input type="password" id="admin-code" name="adminCode" class="form-input" required placeholder="Enter 6-digit code">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="security-question">Security Question: What is the name of our first store location?</label>
+                            <input type="text" id="security-question" name="securityAnswer" class="form-input" required>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary form-submit">Access Admin Panel</button>
+                        
+                        <div class="text-center mt-lg">
+                            <p style="font-size: var(--font-size-sm); color: var(--neutral-500);">
+                                All admin access attempts are logged and monitored.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 RhythmMusics. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="scripts/admin-auth.js"></script>
+</body>
+</html>

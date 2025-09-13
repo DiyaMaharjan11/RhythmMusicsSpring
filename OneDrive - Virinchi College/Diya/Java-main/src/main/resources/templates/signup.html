@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Rhythm Music</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <img th:src="@{/assets/logo.png}" alt="Logo">
+            <h2>Create Account</h2>
+            <p>Join our musical community today</p>
+
+            <!-- Display Success message -->
+            <th:block th:if="${session.succMsg}">
+                <div class="alert alert-success mt-3 mx-3 rounded-3 border-0"
+                     style="background: rgba(25, 135, 84, 0.1); color: #198754; border: 1px solid rgba(25, 135, 84, 0.3) !important;">
+                    <i class="fas fa-check-circle me-2"></i>[[${session.succMsg}]]
+                </div>
+                <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+            </th:block>
+
+            <!-- Display error message -->
+            <th:block th:if="${session.errorMsg}">
+                <div class="alert alert-danger mt-3 mx-3 rounded-3 border-0"
+                     style="background: rgba(220, 53, 69, 0.1); color: #dc3545; border: 1px solid rgba(220, 53, 69, 0.3) !important;">
+                    <i class="fas fa-exclamation-triangle me-2"></i>[[${session.errorMsg}]]
+                </div>
+                <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+            </th:block>
+        </div>
+
+        <!-- ✅ Bind form with userDtls object -->
+        <form action="/saveUser" method="post" enctype="multipart/form-data" class="auth-form" id="signupForm">
+
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email"  required>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber"  required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password"  required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword"  required>
+            </div>
+
+            <div class="form-section mb-4">
+                <h5 class="fw-bold mb-3" style="color: #667eea;">
+                    <i class="fas fa-camera me-2"></i>Profile Picture
+                </h5>
+
+                <!--ImageUpload-->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold mb-2" style="color: #333;">
+                        <i class="fas fa-image me-2" style="color: #667eea;"></i>Choose Profile Image
+                    </label>
+                    <input class="form-control form-control-lg rounded-3 border-0 shadow-sm"
+                           name="img" type="file" accept="image/*"
+                           style="background: #f8f9fa; transition: all 0.3s ease; padding: 12px 16px;"
+                           onfocus="this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'; this.style.background='white'"
+                           onblur="this.style.boxShadow='none'; this.style.background='#f8f9fa'">
+                </div>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the Terms of Service and Privacy Policy</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Account</button>
+
+            <div class="form-footer">
+                <p>Already have an account?
+                    <a th:href="@{/login}">Sign in here</a>
+                </p>
+                <a th:href="@{/}">← Back to Home</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="auth-sidebar">
+        <div class="sidebar-content">
+            <h3>Why Choose Rhythm Music?</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🎼</span>
+                    <span>Learn Traditional Nepali Instruments</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎸</span>
+                    <span>Modern Instrument Lessons</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🌟</span>
+                    <span>Certified Instructors</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📱</span>
+                    <span>Flexible Online Learning</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/auth.js}"></script>
+</body>
+</html>
